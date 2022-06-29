@@ -30,3 +30,16 @@ resource "aws_security_group" "ssh-access" {
     Name = "ssh"  
   }
 }
+
+resource "aws_s3_bucket" "b" {
+  bucket = "bucket-test"
+
+  tags = {
+    Name = "bucket-test"
+  }
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.b.id
+  acl    = "private"
+}
