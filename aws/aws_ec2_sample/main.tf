@@ -53,13 +53,9 @@ resource "aws_security_group" "ssh-access" {
 
 resource "aws_s3_bucket" "dev4" {
   bucket = "bucket-dev4"
+  acl = "private"
 
   tags = {
     Name = "bucket-dev4"
   }
-}
-
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.b.id
-  acl    = "private"
 }
