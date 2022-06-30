@@ -14,6 +14,27 @@ resource "aws_instance" "dev" {
   vpc_security_group_ids = ["${aws_security_group.ssh-access.id}"]
 }
 
+resource "aws_instance" "dev4" {
+  ami = "ami-052efd3df9dad4825"
+  instance_type = "t2.micro"
+  key_name = ""
+  tags = {
+    Name = "dev${count.index}"
+  }
+  vpc_security_group_ids = ["${aws_security_group.ssh-access.id}"]
+  depends_on = ["${aws_s3_bucket.dev4}"]
+}
+
+resource "aws_instance" "dev5" {
+  ami = "ami-052efd3df9dad4825"
+  instance_type = "t2.micro"
+  key_name = ""
+  tags = {
+    Name = "dev5"
+  }
+  vpc_security_group_ids = ["${aws_security_group.ssh-access.id}"]
+}
+
 resource "aws_security_group" "ssh-access" {
   name = "ssh-access"
   description = "ssh-access"
@@ -31,11 +52,11 @@ resource "aws_security_group" "ssh-access" {
   }
 }
 
-resource "aws_s3_bucket" "b" {
-  bucket = "bucket-test"
+resource "aws_s3_bucket" "dev4" {
+  bucket = "bucket-dev4"
 
   tags = {
-    Name = "bucket-test"
+    Name = "bucket-dev4"
   }
 }
 
